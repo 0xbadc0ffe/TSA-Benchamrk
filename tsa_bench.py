@@ -1,6 +1,4 @@
 import numpy as np
-import matplotlib.pyplot as plt
-
 
 def sample_sphere_uniform(rng, D, n_samples=1):
     """Sample n_samples points uniformly on S^D (in R^{D+1})."""
@@ -19,7 +17,7 @@ def project_tangent(v, p):
 
 def generate_sphere_benchmark(P=10, T=500, D=2, N=50, dt=0.05,
                                sigma_acc=1.0, damping=0.5,
-                               traj_noise_std=0.0, noise_std=0.0, seed=42):
+                               traj_noise_std=0.0, noise_std=0.0, spikeprob=0.01, seed=42):
     """
     Generate a time series benchmark: P particles on S^D mapped to R^N.
     
@@ -43,6 +41,8 @@ def generate_sphere_benchmark(P=10, T=500, D=2, N=50, dt=0.05,
         Standard deviation of noise added to trajectories (before projection).
     noise_std : float
         Observation noise standard deviation.
+    spikeprob: float
+        probability accelaration/velocity spikes
     seed : int or None
         Random seed.
     
@@ -74,10 +74,15 @@ def generate_sphere_benchmark(P=10, T=500, D=2, N=50, dt=0.05,
             
             # Brownian acceleration in tangent space
             acc = rng.normal(0, sigma_acc, size=ambient_dim)
+            spike = rng.uniform(0, 1)<spikeprob +0.
+            # print(spikeang)
+            # print(spikeang*10)
+            acc = acc*(1 + spike*5)  # SPIKING
             acc = project_tangent(acc, pos)
             
             # Update velocity: acceleration + damping
             vel = vel + acc * dt
+            vel = vel*(1 + spike*1)   # SPIKING
             vel = vel * (1 - damping * dt)
             vel = project_tangent(vel, pos)  # maintain tangency
             
