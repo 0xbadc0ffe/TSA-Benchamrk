@@ -7,10 +7,10 @@
 <img src="https://usagif.com/wp-content/uploads/gify/are-you-sure-about-that-21-usagif.gif" width="25%" height="25%"/>
 </p>
 
+Many methods claim to uncover low-dimensional latent structure in complex neural or dynamical data. But in real datasets, **the true underlying manifold is unknown**, making validation difficult.
+Here's a synthetic benchmark for **Time Series Analysis** methods, built to challenge them in recovering the hidden manifold when we *actually* have a ground truth.
 
-Here's a synthetic benchmark for **Time Series Analysis** methods, built to challenge them in recovering hidden manifold when we **actually** have a ground truth.
-
-The core idea: generate smooth, low-dimensional dynamics on a known manifold, embed them into a high-dimensional observation space, then shuffle up the spatial structure, and finally spice up with noise.
+**The core idea**: generate smooth, low-dimensional dynamics on a known manifold, embed them into a high-dimensional observation space, then shuffle up the spatial structure, and finally spice up with noise.
 
 
 ## The generative process
