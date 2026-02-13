@@ -70,8 +70,10 @@ The final output is a matrix of shape **(P\*N, T)** — the benchmark input.
 Gaussian noise can be added at two levels:
 - **Trajectory noise** (`traj_noise_std`): added to sphere coordinates before projection
 - **Observation noise** (`noise_std`): added to the observed signals after projection
+
+This is **measurement** noise, hence it does not affect the underlying smooth dynamics on the manifold.
   
-[**TODO**: better noise models]
+[**TODO**: better noise models!]
 
 
 ## What makes this challenging
